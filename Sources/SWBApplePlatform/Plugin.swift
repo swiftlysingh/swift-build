@@ -76,6 +76,8 @@ struct ApplePlatformSpecsExtension: SpecificationsExtension {
     func specificationClasses() -> [any SpecIdentifierType.Type] {
         [
             ActoolCompilerSpec.self,
+            AppIntentsMetadataCompilerSpec.self,
+            AppIntentsSSUTrainingCompilerSpec.self,
             CoreDataModelCompilerSpec.self,
             CoreMLCompilerSpec.self,
             CopyTiffFileSpec.self,
