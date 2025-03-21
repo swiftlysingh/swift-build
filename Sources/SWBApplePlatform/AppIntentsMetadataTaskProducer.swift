@@ -12,6 +12,7 @@
 
 import SWBCore
 import SWBUtil
+import SWBTaskConstruction
 
 final class AppIntentsMetadataTaskProducer: PhasedTaskProducer, TaskProducer {
     var sourcesBuildPhase: SourcesBuildPhase?

@@ -40,7 +40,7 @@ struct TaskProducersExtension: TaskProducerExtension {
     }
 
     var unorderedPostSetupTaskProducers: [any TaskProducerFactory] {
-        [StubBinaryTaskProducerFactory()]
+        [StubBinaryTaskProducerFactory(), AppIntentsMetadataTaskProducerFactory()]
     }
 
     var globalTaskProducers: [any GlobalTaskProducerFactory] {
@@ -59,6 +59,16 @@ struct StubBinaryTaskProducerFactory: TaskProducerFactory, GlobalTaskProducerFac
 
     func createGlobalTaskProducer(_ globalContext: TaskProducerContext, targetContexts: [TaskProducerContext]) -> any TaskProducer {
         GlobalStubBinaryTaskProducer(context: globalContext, targetContexts: targetContexts)
+    }
+}
+
+struct AppIntentsMetadataTaskProducerFactory: TaskProducerFactory {
+    var name: String {
+        "AppIntentsMetadataTaskProducer"
+    }
+
+    func createTaskProducer(_ context: TargetTaskProducerContext, startPhaseNodes: [PlannedVirtualNode], endPhaseNode: PlannedVirtualNode) -> any TaskProducer {
+        AppIntentsMetadataTaskProducer(context, phaseStartNodes: startPhaseNodes, phaseEndNode: endPhaseNode)
     }
 }
 

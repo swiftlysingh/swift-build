@@ -15,6 +15,7 @@ public import SWBCore
 import struct SWBProtocol.BuildOperationTaskEnded
 public import Foundation
 public import SWBMacro
+import SWBApplePlatform
 
 /// A `TaskProducer` has two distinct phases that are used to create the necessary planning work.
 enum TaskProducerPhase {
@@ -556,7 +557,7 @@ public class TaskProducerContext: StaleFileRemovalContext, BuildFileResolution
     }
 
     /// Get the product generated Swift Objective-C interface header files.
-    func generatedSwiftConstMetadataFiles() -> [String: [Path]] {
+    public func generatedSwiftConstMetadataFiles() -> [String: [Path]] {
         return queue.blocking_sync {
             assert(_inDeferredMode)
             return _generatedGeneratedSwiftConstMetadataFiles
@@ -607,7 +608,7 @@ public class TaskProducerContext: StaleFileRemovalContext, BuildFileResolution
     }
 
     /// Add a deferred task production block.
-    func addDeferredProducer(_ body: @escaping () async -> [any PlannedTask]) {
+    public func addDeferredProducer(_ body: @escaping () async -> [any PlannedTask]) {
         queue.blocking_sync {
             assert(!_inDeferredMode)
             _deferredProducers.append(body)
